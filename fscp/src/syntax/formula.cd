@@ -1,0 +1,20 @@
+include "../lib.java.cd";
+package syntax;
+lookahead = 2;
+
+Formula = Predicate | Compound | Negated | Quantified.
+Predicate = <name> ident "(" <args> CommaList(ident) ")".
+Compound = "(" <left> Formula *s <connective> Connective *s <right> Formula ")".
+Connective = And | Or.
+And = "and".
+Or = "or".
+Negated = "(" "not" <formula> Formula ")".
+
+Quantified = <quantification> Quantification *s <formula> Formula.
+Quantification = "(" <quantifier> Quantifier *s <var> ident *s "in" *s <type> ident <optionalQuantificationPredicate> Option(QuantificationPredicate) ")".
+QuantificationPredicate = *s "where" *s <pred> Predicate.
+Quantifier = ForAll | Exists | Free.
+ForAll = "forall".
+Exists = "exists".
+Free = "free".
+
