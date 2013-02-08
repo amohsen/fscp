@@ -6,10 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+SGHistory = RGHistory | TestHistory.
+
 RGHistory = <verifier> String <falsifier> String <winner> String <assignment> Assignment <timeStamp> String.
 
-SGHistory = CRHistory | TestHistory.
-CRHistory = <rgHistory> RGHistory.
 TestHistory = <testedScholar> String <rgHistory> RGHistory.
 
 nogen Assignment = <varAssignments> List(VarAssignment).

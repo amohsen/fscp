@@ -17,6 +17,7 @@ import edu.neu.ccs.demeterf.lib.SeListNE;
 import edu.neu.ccs.demeterf.lib.ident;
 import fscp.Assignment;
 import fscp.ClaimFamily;
+import fscp.SGHistory;
 import fscp.ClaimFamily.Claim;
 import fscp.Model;
 import fscp.Scholar;
@@ -24,7 +25,6 @@ import fscp.Scholar;
 public class SaddlePointLab{
 	public final ClaimFamily saddlePointClaims;
 	public final Collection<Scholar> scholars = new ArrayList<Scholar>();
-	//public final List<SGHistory> history = new ArrayList<SGHistory>();
 
 	public SaddlePointLab(){
 		try {
@@ -38,14 +38,27 @@ public class SaddlePointLab{
 
 	public static void main(String[] args) {
 		SaddlePointLab lab = new SaddlePointLab();
-		Claim c0 = lab.saddlePointClaims.new Claim(new Assignment().add("q", "z1", "0.0"));
-		Claim c1 = lab.saddlePointClaims.new Claim(new Assignment().add("q", "z1", "1.0"));
-		
 		//populate scholars
-		//populate history
+		Scholar s1 = new SaddlePointScholar("s1");
+		Scholar s2 = new SaddlePointScholar("s2");
+		//
+		System.out.println(lab.labMain(s1, s2));
+		
 		//...
 	}
 
+	public List<SGHistory> labMain(Scholar s1, Scholar s2){
+		List<SGHistory> history = new ArrayList<SGHistory>();
+		
+		Claim c0 = saddlePointClaims.new Claim(new Assignment().add("q", "z1", "0.0"));
+		Claim c1 = saddlePointClaims.new Claim(new Assignment().add("q", "z1", "1.0"));
+		
+		history.addAll(c0.substantiationGame(s1, s2));
+		history.addAll(c1.substantiationGame(s1, s2));
+		
+		return history;
+	}
+	
 	static class SaddlePointModel implements Model{
 
 		@Override
