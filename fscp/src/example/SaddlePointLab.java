@@ -97,7 +97,7 @@ public class SaddlePointLab{
 			}else{
 				SCons<?, X> cns = (SCons<?, X>) lst;
 				List<X> all = toList(cns.getRest());
-				all.add(cns.getFirst());
+				all.add(0, cns.getFirst());
 				return all;
 			}
 		}
@@ -107,7 +107,7 @@ public class SaddlePointLab{
 			}else{
 				SeListNE<?, X> nel = (SeListNE<?, X>) lst;
 				List<X> all = toList(nel.getRest());
-				all.add(nel.getFirst());
+				all.add(0, nel.getFirst());
 				return all;
 			}
 		} 
