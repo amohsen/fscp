@@ -36,18 +36,18 @@ public final class ClaimFamily{
 		}
 		
 		public RGHistory RG(Scholar verifier, Scholar falsifier){
-			Scholar winner = RG(f, m, g, verifier, falsifier);
-			return new RGHistory(verifier.getName(), falsifier.getName(),
-					winner.getName(), g, new Date().toString());
+			return RG(f, m, g, verifier, falsifier);
 		}
 
 		/**
 		 * Returns the winning scholar
 		 * */
-		public Scholar RG(Formula f, Model m, Assignment g, Scholar verifier, Scholar falsifier ){
+		public RGHistory RG(Formula f, Model m, Assignment g, Scholar verifier, Scholar falsifier ){
 			if(f instanceof Predicate){
 				Predicate pred = (Predicate) f;
-				return m.executePredicate(g, pred)? verifier:falsifier;
+				Scholar winner = m.executePredicate(g, pred)? verifier:falsifier;
+				return new RGHistory(verifier.getName(), falsifier.getName(),
+						winner.getName(), g, new Date().toString());
 			}else if(f instanceof Negated){
 				Negated negated = (Negated) f;
 				return RG(negated.getFormula(), m, g, falsifier, verifier);
@@ -92,11 +92,15 @@ public final class ClaimFamily{
 							if(m.executePredicate(g, pred)){
 								return RG(formula, m, g, verifier, falsifier);
 							}else{
-								return other;
+								Scholar winner = other;
+								return new RGHistory(verifier.getName(), falsifier.getName(),
+										winner.getName(), g, new Date().toString());
 							}
 						}
 					}else{
-						return other;
+						Scholar winner = other;
+						return new RGHistory(verifier.getName(), falsifier.getName(),
+								winner.getName(), g, new Date().toString());
 					}
 				}
 			}

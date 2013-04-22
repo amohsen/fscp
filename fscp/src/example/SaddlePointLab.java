@@ -97,7 +97,7 @@ public class SaddlePointLab{
 			}else{
 				SCons<?, X> cns = (SCons<?, X>) lst;
 				List<X> all = toList(cns.getRest());
-				all.add(0, cns.getFirst());
+				all.add(cns.getFirst());
 				return all;
 			}
 		}
